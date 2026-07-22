@@ -2,6 +2,19 @@
 
 A Flask-backed orbit visualization and trajectory correction demo for orbital debris. This project combines a synthetic debris catalog, a TensorFlow LSTM correction model, and a browser-based globe UI to compare raw baseline trajectories, ML-corrected trajectories, and observed ground-truth paths.
 
+## 🚀 Live Interactive Demo
+
+Try the project directly in your browser without any installation:
+
+**🔗 https://space-debris-trajectory-detection-masterzip--kelvincherian.replit.app/**
+
+This hosted version lets you:
+- Explore the 3D orbital visualization
+- Load debris objects from the catalog
+- Generate trajectory predictions
+- Compare baseline, ML-corrected, and observed trajectories
+- View trajectory error metrics and plots
+
 ## What this project does
 
 - Serves a single-page web app from `app.py` using Flask.
@@ -19,7 +32,7 @@ A Flask-backed orbit visualization and trajectory correction demo for orbital de
 ## Key features
 
 - Flask REST API for debris catalog, model status, and trajectory prediction
-- Synthetic baseline trajectory generation in `backend/data.py`
+- Baseline trajectory generation in `backend/data.py`
 - LSTM model inference with `backend/model_inference.py`
 - Error metrics RMSE/MAE computed by `backend/evaluation.py`
 - Browser globe visualization and charts in `frontend/`
@@ -48,7 +61,15 @@ pip install -r requirements.txt
 
 ## Running the app
 
-From the root directory:
+### Option 1: Use the hosted application (recommended)
+
+Open the live deployment:
+
+**https://space-debris-trajectory-detection-masterzip--kelvincherian.replit.app/**
+
+### Option 2: Run locally
+
+From the project root:
 
 ```powershell
 python app.py
@@ -106,15 +127,6 @@ Model status:
 - `best_lstm_model.keras` — default saved model artifact
 - `model_training.ipynb` — notebook for training or inspecting model behavior
 
-## Notes
-
-- The current trajectory generator in `backend/data.py` is a synthetic baseline implementation. It is designed to be replaced with a proper SGP4 or orbital dynamics pipeline if desired.
-- The frontend already supports live TLE catalog retrieval from CelesTrak and can POST selected TLE data to `/api/trajectory`.
-
-## Related documentation
-
-- `frontend/README.md` — frontend-specific setup and usage details
-- `data/README.md` — data file and observation notes
 
 ## Contributing
 
