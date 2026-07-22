@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orbital Debris Trajectory Refinement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-gradient"></div>
+    <div class="noise-overlay"></div>
+
+    <main class="layout">
+      <header class="hero">
+        <p class="eyebrow">Space Debris Intelligence</p>
+        <h1>Physics + ML Orbital Correction Console</h1>
+        <p class="subtitle">
+          Visualize classical SGP4 propagation, machine-learned correction vectors, and comparative prediction error in a
+          single mission-style dashboard.
+        </p>
+      </header>
+
+      <section class="panel controls">
+        <h2>Scenario Controls</h2>
+        <p class="catalog-meta" id="catalog-meta">Loading live CelesTrak debris feed...</p>
+
+        <label for="debris-select">Debris Object</label>
+        <select id="debris-select"></select>
+
+        <label for="horizon-slider">Prediction Horizon (minutes)</label>
+        <div class="slider-row">
+          <input id="horizon-slider" type="range" min="30" max="360" step="30" value="180" />
+          <output id="horizon-output">180</output>
+        </div>
+
+        <div class="toggle-row">
+          <label class="switch">
+            <input id="show-uncorrected" type="checkbox" checked />
+            <span>Show raw SGP4 path</span>
+          </label>
+          <label class="switch">
+            <input id="show-corrected" type="checkbox" checked />
+            <span>Show corrected ML path</span>
+          </label>
+        </div>
+
+        <div class="tle-box">
+          <p class="tle-title">TLE Snapshot</p>
+          <pre id="tle-text"></pre>
+        </div>
+      </section>
+
+      <section class="panel globe-panel">
+        <!-- <div class="globe-legend">
+          <span><i class="dot raw"></i>Raw SGP4</span>
+          <span><i class="dot corrected"></i>Corrected</span>
+          <span><i class="dot truth"></i>Observed</span>
+        </div> -->
+        <div id="globe"></div>
+      </section>
+
+      <section class="panel metrics">
+        <h2>Error Metrics</h2>
+        <div class="metric-grid">
+          <article>
+            <h3>RMSE (km)</h3>
+            <p id="rmse-raw">-</p>
+            <small>Raw SGP4</small>
+          </article>
+          <article>
+            <h3>RMSE (km)</h3>
+            <p id="rmse-corrected">-</p>
+            <small>Corrected</small>
+          </article>
+          <article>
+            <h3>MAE (km)</h3>
+            <p id="mae-raw">-</p>
+            <small>Raw SGP4</small>
+          </article>
+          <article>
+            <h3>MAE (km)</h3>
+            <p id="mae-corrected">-</p>
+            <small>Corrected</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel chart-panel">
+        <h2>Error Over Time</h2>
+        <div id="error-chart"></div>
+      </section>
+    </main>
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <script src="./app_plotly.js"></script>
+  </body>
+</html>
